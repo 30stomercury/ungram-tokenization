@@ -31,11 +31,11 @@ std::map<string, int> compute_single_freq(vector<vector<string>>& v) {
     std::map<string, int> freqs;
     for (int i = 0; i < v.size(); i++) {
         auto& vi = v[i];
-		int j = 0;
-		while (j < vi.size()) {
-		    freqs[vi[j]] += 1;
-		    j++;
-	    }
+        int j = 0;
+        while (j < vi.size()) {
+            freqs[vi[j]] += 1;
+            j++;
+        }
     }
     return freqs;
 }
@@ -44,11 +44,11 @@ std::map<std::pair<string, string>, int> compute_pair_freq(vector<vector<string>
     std::map<std::pair<string, string>, int> freqs;
     for (int i = 0; i < v.size(); i++) {
         auto& vi = v[i];
-		int j = 0;
-		while (j < vi.size() - 1) {
-		    freqs[{vi[j], vi[j + 1]}] += 1;
-		    j++;
-	    }
+        int j = 0;
+        while (j < vi.size() - 1) {
+            freqs[{vi[j], vi[j + 1]}] += 1;
+            j++;
+        }
     }
     return freqs;
 }
@@ -66,7 +66,8 @@ void merge_pairs(
                 // Add the merged pair
                 new_split.push_back(merges[merge_pair]);
                 j += 2;  // Skip the next token since it's merged
-            } else {
+            } 
+            else {
                 new_split.push_back(vi[j]);
                 j++;
             }
@@ -78,7 +79,7 @@ void merge_pairs(
 
         // Update the splits for the word
         v[i] = new_split;
-	}
+    }
 }
 
 string dfs(
@@ -113,11 +114,11 @@ string dfs(
 
 template<class T>
 auto print_vec(vector<T> v) {
-	cout << v[0];
+    cout << v[0];
     for (int i = 1; i < v.size(); i++) {
-		cout << " " << v[i];
-	}
-	cout << endl;
+        cout << " " << v[i];
+    }
+    cout << endl;
 }
 
 int main(int argc, char* argv[]) {
