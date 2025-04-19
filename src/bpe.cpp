@@ -61,16 +61,16 @@ void merge_pairs(
         auto& vi = v[i];
 		int j = 0;
         vector<string> new_split;
-		while (j < vi.size() - 1) {
-			if (vi[j] == merge_pair.first && vi[j + 1] == merge_pair.second) {
-				// Add the merged pair
-				new_split.push_back(merges[merge_pair]);
-				j += 2;  // Skip the next token since it's merged
-			} else {
-				new_split.push_back(vi[j]);
-				j++;
-			}
-		}
+        while (j < vi.size() - 1) {
+            if (vi[j] == merge_pair.first && vi[j + 1] == merge_pair.second) {
+                // Add the merged pair
+                new_split.push_back(merges[merge_pair]);
+                j += 2;  // Skip the next token since it's merged
+            } else {
+                new_split.push_back(vi[j]);
+                j++;
+            }
+        }
 		// If the last element was not included
 		if (j == vi.size() - 1) {
 			new_split.push_back(vi.back());
