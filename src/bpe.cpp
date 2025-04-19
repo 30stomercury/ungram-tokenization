@@ -59,7 +59,7 @@ void merge_pairs(
     std::map<std::pair<string, string>, string>& merges) {
     for (int i = 0; i < v.size(); i++) {
         auto& vi = v[i];
-		int j = 0;
+        int j = 0;
         vector<string> new_split;
         while (j < vi.size() - 1) {
             if (vi[j] == merge_pair.first && vi[j + 1] == merge_pair.second) {
@@ -71,13 +71,13 @@ void merge_pairs(
                 j++;
             }
         }
-		// If the last element was not included
-		if (j == vi.size() - 1) {
-			new_split.push_back(vi.back());
-		}
+        // If the last element was not included
+        if (j == vi.size() - 1) {
+            new_split.push_back(vi.back());
+        }
 
-		// Update the splits for the word
-		v[i] = new_split;
+        // Update the splits for the word
+        v[i] = new_split;
 	}
 }
 
