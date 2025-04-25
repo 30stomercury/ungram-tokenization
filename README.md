@@ -24,11 +24,11 @@ bin/bpe.out input_text_file output init_vocab_size target_vocab_size
 iterative vocab refinements.
 ```
 mkdir out_dir
-train_parallel.sh input_text_file out_dir target_vocab_size min_vocab_size output.freq
+./train_parallel.sh input_text_file out_dir target_vocab_size min_vocab_size output.freq
 ```
-or if your data is not too large:
+- If your data is not too large:
 ```
-train.sh input_text_file out_dir target_vocab_size min_vocab_size output.freq
+./train.sh input_text_file out_dir target_vocab_size min_vocab_size output.freq
 ```
 
 
@@ -36,5 +36,5 @@ train.sh input_text_file out_dir target_vocab_size min_vocab_size output.freq
 ```
 mkdir exp
 bin/bpe.out test.txt test 39 256
-sh train.sh test.txt exp 128 39 test.freq
+./train.sh test.txt exp 128 39 test.freq
 ```
