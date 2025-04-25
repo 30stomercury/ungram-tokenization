@@ -6,6 +6,7 @@ This is an implementation of unigram tokenization in C++ (for fun). In particula
 
 
 ```
+mkdir bin
 g++ src/bpe.cpp src/unigram.cpp -o bin/bpe.out
 g++ src/decode.cpp src/unigram.cpp -o bin/unigram_decode.out
 g++ src/unigram_aggr.cpp src/unigram.cpp -o bin/unigram_aggr.out
