@@ -133,9 +133,9 @@ viterbiBackward(const vector<string>& seq,
 }
 
 string dfs(
-    std::pair<string, string> mypair, 
-    std::map<string, std::pair<string, string>>& reversed_merges,
-    int init_vocab_size) {
+    const std::pair<string, string> mypair, 
+    const std::map<string, std::pair<string, string>>& reversed_merges,
+    const std::map<string, int> single_freqs) {
     string output = "";
     std::stack<string> q;
     q.push(mypair.second);
@@ -145,14 +145,14 @@ string dfs(
         string ele = q.top();
         q.pop();
         //cout << ele << endl;
-        if (std::stoi(ele) < init_vocab_size) {
+        if (single_freqs.count(ele)) {
             output += ele;
             if (q.size() != 0) {
                 output += "_";
             }
         }
         else {
-            auto p = reversed_merges[ele];
+            auto p = reversed_merges.at(ele);
             q.push(p.second);
             q.push(p.first);
             //cout << p.first << " " << p.second << endl;

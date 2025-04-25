@@ -5,27 +5,12 @@
 #include <tuple>
 #include <map>
 #include <stack>
+#include <cassert>
+#include "unigram.h"
 
 
 using namespace std;
 
-// split words
-vector<string> splitWords(string str, char splitter) {
-    vector<string> v = {};
-    string word = "";
-    for (std::string::iterator it = str.begin(), end = str.end(); it != end; ++it) {
-        if (*it == splitter) {
-            v.push_back(word);
-            word = "";
-        }
-        else {
-            word = word + *it;
-        }
-    }
-    v.push_back(word);
-
-    return v;
-}
 
 std::map<string, int> compute_single_freq(vector<vector<string>>& v) {
     std::map<string, int> freqs;
@@ -82,48 +67,8 @@ void merge_pairs(
     }
 }
 
-string dfs(
-    std::pair<string, string> mypair, 
-    std::map<string, std::pair<string, string>>& reversed_merges,
-    int init_vocab_size) {
-    string output = "";
-    std::stack<string> q;
-    q.push(mypair.second);
-    q.push(mypair.first);
-    //cout << mypair.first << " " << mypair.second << endl;
-    while (!q.empty()) {
-        string ele = q.top();
-        q.pop();
-        //cout << ele << endl;
-        if (std::stoi(ele) < init_vocab_size) {
-            output += ele;
-            if (q.size() != 0) {
-                output += "_";
-            }
-        }
-        else {
-            auto p = reversed_merges[ele];
-            q.push(p.second);
-            q.push(p.first);
-            //cout << p.first << " " << p.second << endl;
-        }
-    }
-    //cout << output << endl;
-    return output;
-}
-
-template<class T>
-auto print_vec(vector<T> v) {
-    cout << v[0];
-    for (int i = 1; i < v.size(); i++) {
-        cout << " " << v[i];
-    }
-    cout << endl;
-}
 
 int main(int argc, char* argv[]) {
-    int init_vocab_size = 128;
-    int vocab_size = 4096;
     vector<string> v;
     vector<vector<string>> utts;
     string text;
@@ -151,11 +96,14 @@ int main(int argc, char* argv[]) {
     mergefile.open(filename + ".model");
 
     // count individual freqs
+    int init_vocab_size = std::stoi(argv[3]);
+    int vocab_size = std::stoi(argv[4]);
+
     auto single_freqs = compute_single_freq(utts);
-    for (int i = 0; i < init_vocab_size; i++) {
-        auto token = std::to_string(i);
-        freqfile << token << " " << single_freqs[token] << endl;
+    for (auto const& item: single_freqs) {
+        freqfile << item.first << " " << item.second << endl;
     }
+    assert(init_vocab_size >= single_freqs.size());
 
     for (int i = init_vocab_size; i < vocab_size; i++) {
         //  count pair freqs
@@ -172,7 +120,7 @@ int main(int argc, char* argv[]) {
         // merges
         merges[most_freq_pair] = std::to_string(i);
         reversed_merges[std::to_string(i)] = most_freq_pair;
-        auto seg = dfs(most_freq_pair, reversed_merges, init_vocab_size);
+        auto seg = dfs(most_freq_pair, reversed_merges, single_freqs);
         freqfile << seg << " " << max << endl;
         mergefile << most_freq_pair.first << " " << most_freq_pair.second
              << " " << i << endl;

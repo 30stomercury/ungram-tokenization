@@ -38,9 +38,9 @@ pruneVocab(const std::map<std::vector<std::string>, double>& freqs,
         int target_vocab_size, Node* trie);
 
 std::string dfs(
-    std::pair<std::string, std::string> mypair, 
-    std::map<std::string, std::pair<std::string, std::string>>& reversed_merges,
-    int init_vocab_size);
+    const std::pair<std::string, std::string> mypair, 
+    const std::map<std::string, std::pair<std::string, std::string>>& reversed_merges,
+    const std::map<std::string, int> single_freqs);
 
 std::string concatVec(std::vector<std::string> v, std::string splitter);
 
