@@ -35,5 +35,5 @@ train.sh input_text_file out_dir target_vocab_size min_vocab_size output.freq
 ```
 mkdir exp
 bin/bpe.out test.txt test 39 256
-train.sh test.txt exp 128 39 test.freq
+sh train.sh test.txt exp 128 39 test.freq
 ```
