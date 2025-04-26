@@ -2,9 +2,11 @@
 
 This is an implementation of unigram tokenization in C++ (for fun). In particular, it doesn't treat whitespace as a delimiter between text segments.
 
+More details can be found in the original paper:
+- [Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates](https://aclanthology.org/P18-1007/)
 
 
-
+### Compile
 ```
 mkdir bin
 g++ src/bpe.cpp src/unigram.cpp -o bin/bpe.out
