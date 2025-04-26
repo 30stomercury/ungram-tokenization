@@ -5,6 +5,9 @@ This is an implementation of unigram tokenization in C++ (for fun). In particula
 More details can be found in the original paper:
 - [Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates](https://aclanthology.org/P18-1007/)
 
+### Key features
+- Store frequent substrings with a trie.
+- Prune the search space with maximum substring length during Viterbi decoding.
 
 ### Compile
 ```
